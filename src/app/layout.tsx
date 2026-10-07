@@ -21,7 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${notoSansBengali.className}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header />
+        <Header></Header>
         {children}
         <div>Footer</div>
         </body>
