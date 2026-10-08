@@ -2,6 +2,7 @@ import Image from "next/image";
 import NavLinks from "./NavLinks";
 
 const Header = () => {
+  const date = new Date().toLocaleDateString('bn-BD', { dateStyle: 'full' });
   return (
     <header className="sticky top-0 z-50 w-full border-b border-base-200 bg-base-100/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -23,7 +24,7 @@ const Header = () => {
               বাজার দর
             </h1>
             <p className="text-xs font-semibold text-base-content/50 mt-0.5">
-              প্রতিদিনের বাজারের সঠিক তথ্য
+              {date}
             </p>
           </div>
         </div>
