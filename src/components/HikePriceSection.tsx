@@ -1,4 +1,4 @@
-import { IProduct } from "@/Products";
+import { IProduct } from "@/products";
 import ProductCard from "./ProductCard";
 
 export default function PriceHikeSection({ products }: { products: IProduct[] }) {

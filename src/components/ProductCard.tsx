@@ -1,4 +1,4 @@
-import { IProduct } from "@/Products";
+import { IProduct } from "@/products";
 
 const unitLabel = (unit: string) =>
   unit === "kg" ? "কেজি" : unit === "litre" ? "লিটার" : "ডজন";

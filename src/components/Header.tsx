@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link"; // 1. Imported Link component
 import NavLinks from "./NavLinks";
+import UserInfo from "./UserInfo";
 
 const Header = () => {
   const date = new Date().toLocaleDateString('bn-BD', { dateStyle: 'full' });
@@ -8,7 +10,8 @@ const Header = () => {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         
         {/* বাম পাশ: লোগো এবং ব্র্যান্ড টেক্সট */}
-        <div className="flex items-center gap-3 cursor-pointer group">
+        <Link href="/" className="flex items-center gap-3 cursor-pointer group"> 
+          {/* Wrapped Logo with Link to take you back Home when clicked */}
           <div className="avatar rounded-2xl bg-success/10 p-2 transition-transform duration-300 group-hover:scale-105">
             <Image
               className="h-9 w-9 object-contain"
@@ -27,20 +30,12 @@ const Header = () => {
               {date}
             </p>
           </div>
-        </div>
+        </Link>
 
-        {/* ডান পাশ: সাইন ইন এবং সাইন আপ বাটন */}
-        <div className="flex items-center gap-2">
-          <button className="btn btn-ghost btn-sm sm:btn-md font-bold text-base-content/80 rounded-xl hover:bg-base-200">
-            সাইন ইন
-          </button>
-          <button className="btn btn-success btn-sm sm:btn-md font-extrabold text-white rounded-xl px-5 shadow-md shadow-success/20 hover:shadow-lg hover:shadow-success/30 transition-all duration-200">
-            সাইন আপ
-          </button>
-        </div>
+        <UserInfo />
 
       </div>
-      <NavLinks></NavLinks>
+      <NavLinks />
     </header>
   );
 };
