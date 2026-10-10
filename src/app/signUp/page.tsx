@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast"; // 1. Imported toast package
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const SignUpPage = () => {
     const formData = new FormData(form);
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
-    const image = String(formData.get("image") || "").trim(); // Image URL নেওয়া হলো
+    const image = String(formData.get("image") || "").trim();
     const password = String(formData.get("password") || "");
     const confirmPassword = String(formData.get("confirmPassword") || "");
 
@@ -39,40 +40,52 @@ const SignUpPage = () => {
         name,
         email,
         password,
-        image: image || undefined, // Image URL পাস করা হলো
+        image: image || undefined,
         callbackURL: "/",
       });
 
       if (error) {
-        console.error("Sign-up error:", error);
+        // Updated logging configuration to prevent getting an empty object {} in your console
+        console.error("Sign-up error details:", error);
         setErrorMsg(error.message || "অ্যাকাউন্ট তৈরি করতে সমস্যা হয়েছে।");
         return;
       }
 
       if (data) {
+        // 2. Trigger success toast notification
+        toast.success("Successfully signed up!", {
+          duration: 4000,
+          position: "top-center",
+        });
+        
         router.push("/");
       }
     } catch (err) {
-      console.error("Unexpected error:", err);
+      console.error("Unexpected error details:", err);
       setErrorMsg("সার্ভারের সাথে সংযোগ করা যাচ্ছে না। আবার চেষ্টা করুন।");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSocial = async (provider: "google" | "github") => {
-    setErrorMsg(null);
-    try {
-      await authClient.signIn.social({ provider, callbackURL: "/" });
-    } catch (err) {
-      console.error(err);
-      setErrorMsg("সোশ্যাল লগইনে সমস্যা হয়েছে।");
-    }
+    const inputClass =
+    "w-full px-3 py-2 text-xs border border-[#e5e7eb] rounded-lg focus:outline-none focus:border-[#059669] placeholder-[#9ca3af] transition-colors";
+// Social sign-in handler 
+  const handleSocial = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      
+    });
+      console.log(data)
   };
 
-  const inputClass =
-    "w-full px-3 py-2 text-xs border border-[#e5e7eb] rounded-lg focus:outline-none focus:border-[#059669] placeholder-[#9ca3af] transition-colors";
-
+  const handleSocialGithub = async () => {
+    const data = await authClient.signIn.social({
+      provider: "github",
+      
+    });
+    console.log(data);
+  };
   return (
     <div className="min-h-screen bg-[#f3f4f6] flex items-center justify-center font-sans antialiased p-4">
       <div className="w-full max-w-[420px]">
@@ -99,7 +112,6 @@ const SignUpPage = () => {
               <input type="email" name="email" placeholder="you@example.com" required className={inputClass} />
             </div>
 
-            {/* Image URL Input Field */}
             <div>
               <label className="block text-xs font-semibold text-[#1f2937] mb-1">প্রোফাইল ছবি (URL)</label>
               <input type="url" name="image" placeholder="https://example.com/avatar.jpg" className={inputClass} />
@@ -134,7 +146,7 @@ const SignUpPage = () => {
           <div className="grid grid-cols-2 gap-3 mb-5">
             <button
               type="button"
-              onClick={() => handleSocial("google")}
+              onClick={handleSocial}
               className="flex items-center justify-center gap-1.5 px-3 py-2 border border-[#e5e7eb] rounded-lg text-xs font-medium text-[#374151] hover:bg-[#f9fafb] transition-colors"
             >
               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
@@ -146,9 +158,10 @@ const SignUpPage = () => {
               <span>Google দিয়ে চালিয়ে যান</span>
             </button>
 
-            <button
+            <button 
               type="button"
-              onClick={() => handleSocial("github")}
+              onClick={handleSocialGithub}
+              
               className="flex items-center justify-center gap-1.5 px-3 py-2 border border-[#e5e7eb] rounded-lg text-xs font-medium text-[#374151] hover:bg-[#f9fafb] transition-colors"
             >
               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
@@ -164,7 +177,7 @@ const SignUpPage = () => {
         </div>
 
         <div className="text-center mt-5">
-          <a href="/" className="text-xs text-[#6b7280] hover:text-[#374151] transition-colors">← হোম পেজে ফিরে যান</a>
+          <a href="/signIn" className="text-xs text-[#6b7280] hover:text-[#374151] transition-colors">← হোম পেজে ফিরে যান</a>
         </div>
       </div>
     </div>

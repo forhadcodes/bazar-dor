@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 interface INavLinks {
-  id: string;   // Fixed: changed from "string" to string type
+  id: string;   
   slug: string;
   nameBn: string;
   icon: string;

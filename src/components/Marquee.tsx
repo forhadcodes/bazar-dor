@@ -1,7 +1,9 @@
+import Link from "next/link";
 import MarqueeText from "react-marquee-text"
 import "react-marquee-text/dist/styles.css"
 
 interface IHeading {
+    
     "nameBn": string;
     "categoryNameBn": string;
     "categoryIcon": string;
@@ -26,7 +28,7 @@ const Marquee = async () => {
             <MarqueeText direction="right" speed={40} loop={true}>
                 <div className="flex items-center whitespace-nowrap gap-8 pr-8">
                     {heading.map((h, i) => (
-                        <div key={i} className="flex items-center text-[13px] text-[#4a4a4a]">
+                        <Link href={`/products/${h.id}`} key={i} className="flex items-center text-[13px] text-[#4a4a4a]">
                             <span className="mr-1.5 opacity-80">{h.categoryIcon}</span>
                             <span className="font-medium">
                                 {h.nameBn} {h.today} টাকা/{h.unit === "kg" ? "কেজি" : "লিটার"}
@@ -35,7 +37,7 @@ const Marquee = async () => {
                                 <span className="mr-0.5 text-[9px]">{h.change.dir === "up" ? "▲" : "▼"}</span>
                                 {h.change.pct}%
                             </span>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </MarqueeText>

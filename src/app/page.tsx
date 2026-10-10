@@ -3,7 +3,7 @@ import Marquee from "@/components/Marquee";
 import PriceHikeSection from "@/components/PriceHikeSection";
 import PriceDecreaseSection from "@/components/PriceDecreaseSection";
 import AllProduct from "@/components/AllProduct";
-import { IProduct } from "@/types/product";
+import { IProduct } from "@/products";
 
 export default async function ProductsDashboard() {
   const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products", {
