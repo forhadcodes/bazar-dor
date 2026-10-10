@@ -171,9 +171,7 @@ const SignUpPage = () => {
             </button>
           </div>
 
-          <div className="text-center text-xs text-[#4b5563]">
-            অ্যাকাউন্ট আছে? <a href="/sign-in" className="text-[#059669] hover:underline font-semibold">সাইন ইন করুন</a>
-          </div>
+          
         </div>
 
         <div className="text-center mt-5">

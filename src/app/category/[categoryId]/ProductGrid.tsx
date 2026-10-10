@@ -20,8 +20,6 @@ const SORTS = [
   { value: "default", label: "ডিফল্ট" },
   { value: "price-asc", label: "দাম: কম থেকে বেশি" },
   { value: "price-desc", label: "দাম: বেশি থেকে কম" },
-  { value: "rise", label: "সবচেয়ে বেশি বেড়েছে" },
-  { value: "fall", label: "সবচেয়ে বেশি কমেছে" },
 ];
 
 function ChangeBadge({ change }: { change: number }) {
@@ -54,10 +52,6 @@ export default function ProductGrid({  products,  icon,}: {  products: Product[]
         return list.sort((a, b) => a.price - b.price);
       case "price-desc":
         return list.sort((a, b) => b.price - a.price);
-      case "rise":
-        return list.sort((a, b) => b.change - a.change);
-      case "fall":
-        return list.sort((a, b) => a.change - b.change);
       default:
         return list;
     }

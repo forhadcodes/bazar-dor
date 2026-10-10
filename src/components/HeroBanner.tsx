@@ -19,9 +19,12 @@ const HeroBanner = () => {
               চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
               বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
             </p>
-            <button className="bg-[#008753] hover:bg-[#007044] text-white font-medium text-sm px-6 py-2.5 rounded-lg transition-colors shadow-sm">
+            <a
+              href="#সব-পণ্য"
+              className="inline-block bg-[#008753] hover:bg-[#007044] text-white font-medium text-sm px-6 py-2.5 rounded-lg transition-colors shadow-sm"
+            >
               সব পণ্য দেখুন
-            </button>
+            </a>
           </div>
 
           {/* Right Column Hero Graphic */}

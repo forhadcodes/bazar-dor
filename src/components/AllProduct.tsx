@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 
 export default function AllProduct({ products }: { products: IProduct[] }) {
   return (
-    <section className="space-y-4">
+    <section id="সব-পণ্য" className="space-y-4 scroll-mt-20">
       <div className="border-t border-gray-200/60 pt-6">
         <h2 className="text-base font-extrabold text-gray-900 tracking-wide">
           সব পণ্য
