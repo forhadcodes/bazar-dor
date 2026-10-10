@@ -3,7 +3,7 @@ import MarqueeText from "react-marquee-text"
 import "react-marquee-text/dist/styles.css"
 
 interface IHeading {
-    
+    "id": number;
     "nameBn": string;
     "categoryNameBn": string;
     "categoryIcon": string;
@@ -25,10 +25,10 @@ const Marquee = async () => {
 
     return (
         <div className="w-full bg-base-100/85 backdrop-blur-md py-1 border-y border-gray-100">
-            <MarqueeText direction="right" speed={40} loop={true}>
+            <MarqueeText direction="right" duration={30} pauseOnHover={true}>
                 <div className="flex items-center whitespace-nowrap gap-8 pr-8">
-                    {heading.map((h, i) => (
-                        <Link href={`/products/${h.id}`} key={i} className="flex items-center text-[13px] text-[#4a4a4a]">
+                    {heading.map((h) => (
+                        <Link href={`/products/${h.id}`} key={h.id} className="flex items-center text-[13px] text-[#4a4a4a]">
                             <span className="mr-1.5 opacity-80">{h.categoryIcon}</span>
                             <span className="font-medium">
                                 {h.nameBn} {h.today} টাকা/{h.unit === "kg" ? "কেজি" : "লিটার"}

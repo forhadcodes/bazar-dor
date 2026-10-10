@@ -46,10 +46,10 @@ const toBn = (n: number, digits = 0) =>
     maximumFractionDigits: digits,
   });
 
-// ২. আপনার JSON ডেটার ফিল্ডের নাম অনুযায়ী নরমালাইজ ফাংশনটি সাজানো হয়েছে
-function normalize(p: Ip) {
+// ২. আপনার JSON ডেটার ফিল্ডের নাম অনুযায়ী নরমালাইজ ফাংশনটি সাজানো হয়েছে
+function normalize(p: Ip): Lp {
   return {
-    id: p.id ?? p._id ?? p.slug,
+    id: p.id ?? p._id ?? p.slug ?? "",
     name: p.nameBn ?? p.name ?? "", // 👈 JSON-এ 'nameBn' আছে
     unit:
       p.unit === "kg"
@@ -66,16 +66,16 @@ const CategoryProducts = async ({params}: {params: Promise<{ categoryId: string 
   const { categoryId } = await params;
   const meta = CATEGORY_META[categoryId] ?? { name: categoryId, icon: "🛒" };
 
-  // ডাইনামিক প্রোডাক্ট কুয়েরি URL গঠন
+  // ডাইনামিক প্রোডাক্ট কুয়েরি URL গঠন
   const url = `${API_BASE}/products?category=${encodeURIComponent(categoryId)}`;
   const res = await fetch(url, { cache: "no-store" });
   const raw = res.ok ? await res.json() : [];
 
-  const list: Lp[] = Array.isArray(raw)
+  const list: Ip[] = Array.isArray(raw)
     ? raw
     : (raw.products ?? raw.data ?? raw.items ?? []);
 
-  // API যদি কোনো কারণে সব ডেটা একসাথে দেয়, তবে ফ্রন্টএন্ড লেভেলে নিখুঁত ফিল্টারিং
+  // API যদি কোনো কারণে সব ডেটা একসাথে দেয়, তবে ফ্রন্টএন্ড লেভেলে নিখুঁত ফিল্টারিং
   const filtered = list.filter((p) => {
     const c = p.category ?? p.category_slug ?? p.categoryId ?? p.category_id;
     return (
