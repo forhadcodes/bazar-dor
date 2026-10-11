@@ -1,7 +1,7 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import toast from "react-hot-toast"; // 1. Imported toast
+import toast from "react-hot-toast";
 
 interface Ierror {
     message: string;
@@ -16,7 +16,6 @@ const UserInfo = () => {
   const user = session?.user;
   console.log(user);
 
-  // 2. Updated handleSignOut to trigger toast
   const handleSignOut = async () => {
     try {
       await authClient.signOut({
@@ -30,7 +29,6 @@ const UserInfo = () => {
         },
       });
     } catch (error) {
-      // Fallback toast if your auth client does not support fetchOptions configuration parameters directly
       console.error("Sign out error:", error);
       toast.error((error as Ierror).message, {
         position: "top-center",
@@ -39,14 +37,15 @@ const UserInfo = () => {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
       {user ? (
-        <div className="flex flex-col items-center gap-2">
-          <Link href="/profile">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link href="/profile" className="flex items-center gap-2">
             <div className="avatar">
-              <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2">
+              <div className="w-9 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-base-100 sm:w-10">
                 <img
                   alt="User Avatar"
+                  className="object-cover"
                   src={
                     (user as IUser)?.image ||
                     "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
@@ -54,25 +53,29 @@ const UserInfo = () => {
                 />
               </div>
             </div>
+            <h3 className="hidden max-w-[120px] truncate text-sm font-semibold md:block lg:max-w-[160px]">
+              {(user as IUser)?.name}
+            </h3>
           </Link>
-          <h3>{(user as IUser)?.name}</h3>
-          <button onClick={handleSignOut} className="btn btn-success">
+          <button
+            onClick={handleSignOut}
+            className="btn btn-success btn-sm sm:btn-md whitespace-nowrap rounded-xl text-white"
+          >
             Sign Out
           </button>
         </div>
       ) : (
-        <div className="flex items-center gap-2">
-          {/* Note: Standardized routes to match lower-case hyphen style used previously */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <Link
             href="/signIn"
-            className="btn btn-ghost btn-sm sm:btn-md font-bold text-base-content/80 rounded-xl hover:bg-base-200 flex items-center justify-center"
+            className="btn btn-ghost btn-sm sm:btn-md flex items-center justify-center whitespace-nowrap rounded-xl px-2 font-bold text-base-content/80 hover:bg-base-200 sm:px-4"
           >
             সাইন ইন
           </Link>
 
           <Link
             href="/signUp"
-            className="btn btn-success btn-sm sm:btn-md font-extrabold text-white rounded-xl px-5 shadow-md shadow-success/20 hover:shadow-lg hover:shadow-success/30 transition-all duration-200 flex items-center justify-center"
+            className="btn btn-success btn-sm sm:btn-md flex items-center justify-center whitespace-nowrap rounded-xl px-3 font-extrabold text-white shadow-md shadow-success/20 transition-all duration-200 hover:shadow-lg hover:shadow-success/30 sm:px-5"
           >
             সাইন আপ
           </Link>

@@ -85,7 +85,7 @@ const SignUpPage = () => {
     console.log(data);
   };
   return (
-    <div className="min-h-screen bg-[#f3f4f6] flex items-center justify-center font-sans antialiased p-4">
+    <div className="flex-1 bg-[#f3f4f6] flex items-start justify-center font-sans antialiased px-4 pt-6 pb-10 sm:pt-10 md:pt-14">
       <div className="w-full max-w-[420px]">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-[#1f2937] mb-1">

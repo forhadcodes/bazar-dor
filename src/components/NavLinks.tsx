@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 interface INavLinks {
-  id: string;   
+  id: string;
   slug: string;
   nameBn: string;
   icon: string;
@@ -16,11 +16,11 @@ const NavLinks = async () => {
   console.log(navs);
 
   return (
-    <div className="mx-auto flex max-w-6xl items-center px-4 py-3 flex-col sm:flex-row gap-2 sm:gap-4">
+    <div className="mx-auto flex max-w-6xl flex-row flex-nowrap items-center gap-1 overflow-x-auto px-3 py-2 sm:gap-3 sm:px-4 sm:py-3 md:flex-wrap md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {/* 🏠 Add Home Link here */}
       <Link
         href="/"
-        className="btn btn-ghost btn-sm sm:btn-md font-bold text-base-content/80 rounded-xl hover:bg-base-200"
+        className="btn btn-ghost btn-sm sm:btn-md shrink-0 whitespace-nowrap rounded-xl font-bold text-base-content/80 hover:bg-base-200"
       >
         🏠 হোম
       </Link>
@@ -30,7 +30,7 @@ const NavLinks = async () => {
         <Link
           key={i}
           href={`/category/${n.slug}`}
-          className="btn btn-ghost btn-sm sm:btn-md font-bold text-base-content/80 rounded-xl hover:bg-base-200"
+          className="btn btn-ghost btn-sm sm:btn-md shrink-0 whitespace-nowrap rounded-xl font-bold text-base-content/80 hover:bg-base-200"
         >
           {n.icon} {n.nameBn}
         </Link>

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Noto_Sans_Bengali} from "next/font/google";
+import { Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import { Toaster } from "react-hot-toast";
-import Footer from "./footer/page";
+import Footer from "@/components/Footer";
 
 const notoSansBengali = Noto_Sans_Bengali({
   variable: "--font-noto-sans-bengali",
-  subsets: [ "latin", "bengali"],
+  subsets: ["latin", "bengali"],
 });
 
 export const metadata: Metadata = {
@@ -20,14 +20,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-theme="light"
-      className={`${notoSansBengali.className}  h-full antialiased`}
+      className={`${notoSansBengali.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col"  suppressHydrationWarning={true} >
+      <body
+        className="flex min-h-full flex-col overflow-x-hidden"
+        suppressHydrationWarning={true}
+      >
         <Header></Header>
-         <Toaster /> 
+        <Toaster />
         {children}
         <Footer />
-        </body>
+      </body>
     </html>
   );
 }
