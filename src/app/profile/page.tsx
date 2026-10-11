@@ -20,7 +20,7 @@ const ProfilePage = () => {
     // Login kora na thakle sign-in page-e pathano
     useEffect(() => {
         if (!isPending && !session) {
-            router.replace("/sign-in");
+            router.replace("/signIn");
         }
     }, [isPending, session, router]);
 
